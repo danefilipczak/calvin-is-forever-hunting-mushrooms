@@ -8,6 +8,19 @@ specimenData = [
 			species:'Amanita muscaria',
 			loc: {lat: 0, lng:0},
 			notes: "Found by the river, in a largish box of pinecones"
+		},{
+			species:'Sarcoscypha coccinea',
+			loc: {lat: 0, lng:0},
+			notes: "Found across from the churchyard, where love and anxiety meet"
+		},{
+			species:'Fungi imperfecti',
+			loc: {lat: 0, lng:0},
+			notes: "Found by the overpass, had to fight a bear for it. "
+		},
+		{
+			species:'Fungi imperfecti',
+			loc: {lat: 0, lng:0},
+			notes: "Found by the overpass OF THE BAY, had to fight a bear for it. "
 		}
 	]
 
@@ -26,8 +39,11 @@ function ViewModel() {
 		self.specimens.push(new Specimen(sData));
 	})
 
-    this.currentSpecimen = ko.observable(self.specimens()[0]);
 
+
+
+    
+	//----------------------picture stuff
     this.cameraButtonState = ko.observable('&#128247')
     this.togglePic = function(){
     	if(self.cameraButtonState() == '&#128247'){
@@ -44,12 +60,61 @@ function ViewModel() {
     }
 
 
+
+    //current specimen stuff
+    this.currentSpecimen = ko.observable();
+
     this.setCurrentSpecimen = function(spec){
+    	if(self.currentSpecimen()){self.currentSpecimen().isSelected(false)};
     	self.currentSpecimen(spec);
+    	self.currentSpecimen().isSelected(true);
     }
+
+    this.setCurrentSpecimen(self.specimens()[0]);
     //this.picSrc = ko.observable("")
 
-    
+
+
+
+
+    //get an array of unique species identifiers 
+    this.species = [];
+    this.specimens().forEach(function(s){
+    	self.species.push(s.species)
+    })
+    this.species = this.species.filter(function (e, i, arr) {
+	    return arr.lastIndexOf(e) === i;
+	});
+
+	
+
+	var temp = [];
+	for(var i = 0; i<this.species.length; i++){
+		temp.push(new Species(this.species[i]));
+	}
+	this.species = temp;
+
+
+	this.currentSpecies = ko.observable();
+	this.setCurrentSpecies = function(s){
+		if(self.currentSpecies() instanceof Species){self.currentSpecies().isSelected(false)};
+		self.currentSpecies(s);
+		self.currentSpecies().isSelected(true);
+		self.revealSpecies();
+
+	}
+
+	
+
+    this.revealSpecies = function(){
+    	console.log('reveal')
+    }
+
+
+    var all = new Species('All');
+	this.species.push(all);
+	this.setCurrentSpecies(this.species[this.species.length-1]);
+	this.species.reverse();
     
    
 }

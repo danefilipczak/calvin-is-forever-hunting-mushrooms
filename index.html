@@ -22,10 +22,18 @@
 		<article class = "article" id = "nav">
 			<br>
 
-			<input type="text" id="myInput" onkeyup="filterList()" placeholder="Search.." title="Type in a name">
+			<input type="text" id="myInput" onkeyup="filterList()" placeholder="Filter species..." title="Type in a name">
 
-			<ul id="myUL" data-bind="foreach: specimens">
-			  <li data-bind="click: $parent.setCurrentSpecimen"><a data-bind="text: species"></a></li>
+			<ul id="myUL" data-bind="foreach: species">
+			  <!-- <li data-bind="if: isSelected, click: $parent.setCurrentSpecimen" ><a data-bind="text: species"></a></li> -->
+			  <li data-bind="click: $parent.setCurrentSpecies" >
+
+			  	<a data-bind="text: name, css: { 'isSelected': isSelected }">
+			  		
+			  	</a>
+
+			  </li>
+			  
 			  <!-- <li><a href="#">Adele</a></li>
 			  <li><a href="#">Agnes</a></li>
 
@@ -44,9 +52,10 @@
 		</article>
 		
 		<article class = "article" id = "specimen">
-			<span>ID: <a data-bind = "text: currentSpecimen().id"></a> </span>
 			<br>
-			<span>species: <a data-bind = "text: currentSpecimen().species"></a> </span>
+			<span>Specimen ID: <a data-bind = "text: currentSpecimen().id"></a> </span>
+			<br>
+			<span>Species: <a data-bind = "text: currentSpecimen().species"></a> </span>
 			<p data-bind = "text: currentSpecimen().notes"></p>
 			
 		</article>

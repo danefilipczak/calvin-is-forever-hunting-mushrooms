@@ -144,7 +144,14 @@ html, body {
 
 
 
-
 #myUL li a:hover {
   background-color: #eee;
+}
+
+
+
+.isSelected{
+	/*font-family:verdana;*/
+	font-size:40px;
+	font-weight:bold;
 }

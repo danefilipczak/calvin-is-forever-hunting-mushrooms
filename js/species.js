@@ -1,5 +1,11 @@
 globalSpecimenCounter = 0;
 
+
+function Species(name){
+		this.name = name;
+		this.isSelected = ko.observable(false);
+	}
+
 function Specimen(data) {
 	var self = this;
 	this.species = data.species || 'fungus amungus';
@@ -12,6 +18,8 @@ function Specimen(data) {
 
 	//makes an ajax call to wikipedia to locate an image of this species
 	this.path = '';
+
+	this.isSelected = ko.observable(false);
 
 
 
@@ -56,6 +64,12 @@ Specimen.prototype.getWikiImgSrc = function(articleName){
 	    }
 	)
 };
+
+
+
+// function Species(species){
+// 	this.species = species;
+// }
 
 
 
