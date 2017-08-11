@@ -1,11 +1,11 @@
 // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
 specimenData = [
 		{
-			species:'physarium',
+			species:'Fuligo septica',
 			loc: {lat: 0, lng:0},
 			notes: "Found in the cemetary, by the big tree."
 		},{
-			species:'cool mushroom',
+			species:'Amanita muscaria',
 			loc: {lat: 0, lng:0},
 			notes: "Found by the river, in a largish box of pinecones"
 		}
@@ -14,41 +14,26 @@ specimenData = [
 
 
 
-function getWikiImgSrc(articleName){
-	var url = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + articleName + '&prop=pageimages&format=json';
-	$.ajax({
-	    url: url,
-	    dataType: "jsonp",
-	    success: function(r){
-	        
-	        //extract the page ID from the reponse
-	        var pageId = r.query.pages;
-	        pageId = Object.keys(pageId)[0];
-	        //console.log(pageId)
 
-	        //then use it to get the img location
-	        var imgFile = r.query.pages[pageId].pageimage;
-	        console.log(imgFile);
-	    	}
-	    }
-	)
-}
 
 
 function ViewModel() {
-	self = this;
+	var self = this;
 
 	this.specimens = ko.observableArray([]);
 
 	specimenData.forEach(function(sData){
-		self.specimens.push(new Specimen(sData))
+		self.specimens.push(new Specimen(sData));
 	})
 
-    this.currentSpecimen = ko.observable(this.specimens()[0]);
+    this.currentSpecimen = ko.observable(self.specimens()[0]);
 
     this.cameraButtonState = ko.observable('&#128247')
     this.togglePic = function(){
     	if(self.cameraButtonState() == '&#128247'){
+    		//this redundent line takes care of asynchonous loading of the url paths
+    		self.currentSpecimen(self.currentSpecimen())
+
     		self.cameraButtonState('&#9940;')
     		//show picture
     		$('#pic').animate({width:window.innerWidth}, 618);
@@ -58,9 +43,9 @@ function ViewModel() {
     	}
     }
 
-    this.picSrc = ko.observable("https://upload.wikimedia.org/wikipedia/commons/0/0b/Charadrius-melodus-004_edit.jpg")
+    //this.picSrc = ko.observable("")
 
-    //this.wikiList = ko.observableArray([]);
+    
     
    
 }
