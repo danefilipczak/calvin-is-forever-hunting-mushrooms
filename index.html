@@ -20,10 +20,24 @@
 <div class = "main">
 	<section class = "content">
 		<article class = "article" id = "nav">
-			<div data-bind = "foreach: specimens">
-			<h1 data-bind = "text: species"></h1>
-			<span data-bind = "text: loc.lat"></span> <span data-bind = "text: loc.lng"></span>
-			</div>
+			<br>
+
+			<input type="text" id="myInput" onkeyup="filterList()" placeholder="Search.." title="Type in a name">
+
+			<ul id="myUL" data-bind="foreach: specimens">
+			  <li data-bind="click: $parent.setCurrentSpecimen"><a data-bind="text: species"></a></li>
+			  <!-- <li><a href="#">Adele</a></li>
+			  <li><a href="#">Agnes</a></li>
+
+			  
+			  <li><a href="#">Billy</a></li>
+			  <li><a href="#">Bob</a></li>
+
+			  
+			  <li><a href="#">Calvin</a></li>
+			  <li><a href="#">Christina</a></li>
+			  <li><a href="#">Cindy</a></li> -->
+			</ul>
 
 
 			

@@ -4,6 +4,7 @@ html, body {
         margin: 0;
         padding: 0;
         background-color:black;
+         box-sizing: border-box;
 }
 
 #map {
@@ -42,6 +43,7 @@ html, body {
 #nav{
 /*	background-color:black;
 	opacity:0.5;*/
+	overflow:scroll;
 	background-color:rgba(0, 0, 0, 0.618);
 }
 
@@ -107,4 +109,42 @@ html, body {
 	height:100%;
 	width:auto;
 	
+}
+
+/*-------------------------for the filter box*/
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 12px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  /*padding: 12px 20px 12px 0px;*/
+  padding-bottom:20px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myUL {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#myUL li a {
+  border: 1px solid #ddd;
+  margin-top: -1px; /* Prevent double borders */
+  background-color: #f6f6f6;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block
+}
+
+
+
+
+#myUL li a:hover {
+  background-color: #eee;
 }
