@@ -9,12 +9,18 @@ html, body {
 
 #map {
 	position:fixed;
-	background-color:yellow;
+	/*background-color:yellow;*/
 	height:100%;
 	width:100%;
 	top:0px;
 	left:0px;
 	/*z-index:-2;*/
+}
+
+.highlight{
+	background-color:black;
+	margin:3px;
+	padding:2px;
 }
 
 .main {
@@ -38,13 +44,15 @@ html, body {
 */	width:30%;
 	margin:0px;
 	padding:0px;
+
+
 }
 
 #nav{
 /*	background-color:black;
 	opacity:0.5;*/
 	overflow:scroll;
-	background-color:rgba(0, 0, 0, 0.618);
+	/*background-color:rgba(0, 0, 0, 0.618);*/
 }
 
 #species{
@@ -53,6 +61,17 @@ html, body {
 */
 
 	z-index:3;
+
+
+
+}
+
+
+
+#specimen{
+	outline-width:10px;
+	outline-style:solid;
+	outline-color:maroon;
 }
 
 #camera{
@@ -74,9 +93,9 @@ html, body {
 .content {
 
 
-	background-color:rgba(0, 0, 0, 0.618);
+	/*background-color:rgba(0, 0, 0, 0.618);*/
 	color:white;
-	font-size:20px;
+	font-size:25px;
 	height:100%;
 	z-index:1;
 	overflow:scroll;
@@ -114,15 +133,17 @@ html, body {
 /*-------------------------for the filter box*/
 
 #myInput {
-  background-image: url('/css/searchicon.png');
+/*  background-image: url('/css/searchicon.png');
   background-position: 10px 12px;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat;*/
   width: 100%;
   font-size: 16px;
+  background-color:yellow;
   /*padding: 12px 20px 12px 0px;*/
   padding-bottom:20px;
   border: 1px solid #ddd;
   margin-bottom: 12px;
+  color:black;
 }
 
 #myUL {
@@ -134,11 +155,11 @@ html, body {
 #myUL li a {
   border: 1px solid #ddd;
   margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6;
+  /*background-color: black;*/
   padding: 12px;
   text-decoration: none;
-  font-size: 18px;
-  color: black;
+/*  font-size: 18px;
+*/  color: white;
   display: block
 }
 
@@ -146,12 +167,14 @@ html, body {
 
 #myUL li a:hover {
   background-color: #eee;
+  color:black;
 }
 
 
 
 .isSelected{
-	/*font-family:verdana;*/
-	font-size:40px;
+/*	font-family:verdana;
+*/	font-size:30px;
 	font-weight:bold;
+	background-color:maroon;
 }

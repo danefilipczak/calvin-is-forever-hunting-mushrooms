@@ -1,31 +1,4 @@
 // This is a simple *viewmodel* - JavaScript that defines the data and behavior of your UI
-specimenData = [
-		{
-			species:'Fuligo septica',
-			loc: {lat: 0, lng:0},
-			notes: "Found in the cemetary, by the big tree."
-		},{
-			species:'Amanita muscaria',
-			loc: {lat: 0, lng:0},
-			notes: "Found by the river, in a largish box of pinecones"
-		},{
-			species:'Sarcoscypha coccinea',
-			loc: {lat: 0, lng:0},
-			notes: "Found across from the churchyard, where love and anxiety meet"
-		},{
-			species:'Fungi imperfecti',
-			loc: {lat: 0, lng:0},
-			notes: "Found by the overpass, had to fight a bear for it. "
-		},
-		{
-			species:'Fungi imperfecti',
-			loc: {lat: 0, lng:0},
-			notes: "Found by the overpass OF THE BAY, had to fight a bear for it. "
-		}
-	]
-
-
-
 
 
 
@@ -115,7 +88,10 @@ function ViewModel() {
 	this.species.push(all);
 	this.setCurrentSpecies(this.species[this.species.length-1]);
 	this.species.reverse();
-    
+
+
+
+
    
 }
 

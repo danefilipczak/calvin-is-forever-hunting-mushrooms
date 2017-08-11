@@ -1,4 +1,5 @@
 var map;
+var markers = [];
 
 // function initMap(){
 // 	$('#map')[0]
@@ -11,160 +12,113 @@ var map;
 // }
 
 
+styles = 
+
+
+[
+    {
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#0F0919"
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#000000"
+            }
+        ]
+    },
+    {
+        "elementType": "geometry.stroke",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.park",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                // "color": "#002FA7"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.attraction",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#E60003"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#465127"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.business",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#FFED00"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.government",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#D41C1D"
+            }
+        ]
+    },
+    {
+        "featureType": "poi.school",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                "color": "#BF0000"
+            }
+        ]
+    },
+    {
+        "featureType": "transit.line",
+        "elementType": "geometry.fill",
+        "stylers": [
+            {
+                // "saturation": 100,
+                "visibility": "off"
+            }
+        ]
+    }
+]
+
+
 function initMap() {
-	styles = [
-	 	{
-    		featureType: "all",
-    		elementType: "labels",
-    		stylers: [
-      			{ visibility: "off" }
-    		]
-  		},
-	    {
-	        "featureType": "water",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "green"
-	            },
-	            {
-	                "saturation": 00
-	            },
-	            {
-	                "lightness": -100
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "landscape",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "green"
-	            },
-	            {
-	                "saturation": 100
-	            },
-	            {
-	                "lightness": -49
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "poi",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "red"
-	            },
-	            {
-	                "saturation": 100
-	            },
-	            {
-	                "lightness": -46
-	            },
-	            {
-	                "visibility": "off"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road.local",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "#CC79A7"
-	            },
-	            {
-	                "saturation": -55
-	            },
-	            {
-	                "lightness": -36
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road.arterial",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "#F0E442"
-	            },
-	            {
-	                "saturation": -15
-	            },
-	            {
-	                "lightness": -22
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "road.highway",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "#56B4E9"
-	            },
-	            {
-	                "saturation": -23
-	            },
-	            {
-	                "lightness": -2
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "administrative",
-	        "elementType": "geometry",
-	        "stylers": [
-	            {
-	                "hue": "#000000"
-	            },
-	            {
-	                "saturation": 0
-	            },
-	            {
-	                "lightness": -100
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    },
-	    {
-	        "featureType": "transit",
-	        "elementType": "all",
-	        "stylers": [
-	            {
-	                "hue": "#009E73"
-	            },
-	            {
-	                "saturation": 100
-	            },
-	            {
-	                "lightness": -59
-	            },
-	            {
-	                "visibility": "on"
-	            }
-	        ]
-	    }
-	]; 
+	
 
 
     map = new google.maps.Map(document.getElementById('map'), {
@@ -173,10 +127,21 @@ function initMap() {
               position: google.maps.ControlPosition.BOTTOM_CENTER
        },
       center: {lat: 40.4443, lng: -79.9532},
-
-      zoom: 13,
-      styles: styles
+      styles: styles,
+      zoom: 13
     });
+
+    app.specimens().forEach(function(s){
+    	markers.push({
+    		id: s.id,
+    		marker: new google.maps.Marker({
+    			position: s.loc,
+    			map: map,
+    			animation: google.maps.Animation.DROP
+    		})
+    	})
+    })
+    
 
 
 

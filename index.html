@@ -53,10 +53,10 @@
 		
 		<article class = "article" id = "specimen">
 			<br>
-			<span>Specimen ID: <a data-bind = "text: currentSpecimen().id"></a> </span>
+			<span class = "highlight">Specimen ID: <a data-bind = "text: currentSpecimen().id"></a> </span>
 			<br>
-			<span>Species: <a data-bind = "text: currentSpecimen().species"></a> </span>
-			<p data-bind = "text: currentSpecimen().notes"></p>
+			<span class = "highlight">Species: <a data-bind = "text: currentSpecimen().species"></a> </span>
+			<p class = "highlight" data-bind = "text: currentSpecimen().notes"></p>
 			
 		</article>
 
@@ -83,11 +83,12 @@
 
 
 
-
+<script src = "js/map.js"></script>
+<script src = "js/specimenData.js"></script>
 <script src = "js/libs/ko.js"></script>
 <script src = "js/libs/jquery.js"></script>
 <script src = "js/species.js"></script>
-<script src = "js/map.js"></script>
+
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9_E2_FWgeaa-_JdeRo1CUvNfl5xgevj0&v=3&callback=initMap"></script>
 
 
