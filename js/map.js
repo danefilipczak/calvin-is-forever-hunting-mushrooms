@@ -172,8 +172,9 @@ function initMap() {
               style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
               position: google.maps.ControlPosition.BOTTOM_CENTER
        },
-      center: {lat: -34.397, lng: 150.644},
-      zoom: 3,
+      center: {lat: 40.4443, lng: -79.9532},
+
+      zoom: 13,
       styles: styles
     });
 
@@ -187,17 +188,17 @@ function initMap() {
 }
 
 
-$( "#species" ).mouseleave(function() {
-  $( "#map" )[0].focus();
-  console.log('speciesleave')
-  $('#pic').animate({width:0}, 618)
-});
+// $( "#species" ).mouseleave(function() {
+//   $( "#map" )[0].focus();
+//   console.log('speciesleave')
+//   $('#pic').animate({width:0}, 618)
+// });
 
 
-$( "#species" ).mouseenter(function() {
-  $( "#map" )[0].focus();
-  console.log('speciesover')
-  width = window.innerWidth;
-  $('#pic').animate({width:width}, 618);
+// $( "#species" ).mouseenter(function() {
+//   $( "#map" )[0].focus();
+//   console.log('speciesover')
+//   width = window.innerWidth;
+//   $('#pic').animate({width:width}, 618);
 
-});
+// });

@@ -2,7 +2,8 @@
 <html>
 <head>
 <link rel = "stylesheet" href = "css/main.css">
-<title>kaolin pigeon</title>
+<link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
+<title>Cutest Fungus of Pittsburgh</title>
 
 
 </head>
@@ -18,43 +19,36 @@
 <p>Full name: <strong data-bind="text: fullName"></strong></p> -->
 <div class = "main">
 	<section class = "content">
-		<article class = "article">
-			<div data-bind = "foreach: species">
-			<h1 data-bind = "text: name"></h1>
-			<p data-bind = "text: category"></p>
+		<article class = "article" id = "nav">
+			<div data-bind = "foreach: specimens">
+			<h1 data-bind = "text: species"></h1>
+			<span data-bind = "text: loc.lat"></span> <span data-bind = "text: loc.lng"></span>
 			</div>
 
 
-			<div data-bind = "foreach: wikiList">
-			<a href = "" data-bind = "attr: {href: url}"><h1 data-bind = "text: name"></h1></a>
-			</div>
+			
 		</article>
-		<article class = "article">
-			<div data-bind = "foreach: species">
-			<h1 data-bind = "text: name"></h1>
-			<p data-bind = "text: category"></p>
-			</div>
-
-
-			<div data-bind = "foreach: wikiList">
-			<a href = "" data-bind = "attr: {href: url}"><h1 data-bind = "text: name"></h1></a>
-			</div>
+		
+		<article class = "article" id = "specimen">
+			<span>ID: <a data-bind = "text: currentSpecimen().id"></a> </span>
+			<br>
+			<span>species: <a data-bind = "text: currentSpecimen().species"></a> </span>
+			<p data-bind = "text: currentSpecimen().notes"></p>
+			
 		</article>
+
+		<div class = "article" id = "camera">
+			<span data-bind = "click: togglePic, html:cameraButtonState"></span>
+		</div>
+
 		<article class = "article" id = "species">
-			<div data-bind = "foreach: species">
-			<h1 data-bind = "text: name"></h1>
-			<p data-bind = "text: category"></p>
-			</div>
-
-
-			<div data-bind = "foreach: wikiList">
-			<a href = "" data-bind = "attr: {href: url}"><h1 data-bind = "text: name"></h1></a>
-			</div>
+		<!-- 	<h1 data-bind = "text: species">fds</h1> -->
+			
 		</article>
 
 	</section>
 	<div id = "pic" tabindex = "-1">
-	<img id = "bird" src = "https://upload.wikimedia.org/wikipedia/commons/0/0b/Charadrius-melodus-004_edit.jpg">
+	<img id = "bird" data-bind = "attr:{src: picSrc}">
 	</div>
 </div>
 
