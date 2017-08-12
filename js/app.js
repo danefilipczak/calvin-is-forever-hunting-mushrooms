@@ -10,33 +10,33 @@ function ViewModel() {
 
 	specimenData.forEach(function(sData){
 		self.specimens.push(new Specimen(sData));
-	})
+	});
 
 
 
 
     
 	//----------------------picture 
-    this.cameraButtonState = ko.observable('&#x1F50D')
+    this.cameraButtonState = ko.observable('&#x1F50D');
     this.togglePic = function(){
     	if(self.cameraButtonState() == '&#x1F50D'){
     		//this redundent line takes care of asynchonous loading of the url paths
-    		self.currentSpecimen(self.currentSpecimen())
+    		self.currentSpecimen(self.currentSpecimen());
 
-    		self.cameraButtonState('&#9940;')
+    		self.cameraButtonState('&#9940;');
     		//show picture
     		$('#pic').animate({width:window.innerWidth}, 700);
-    		$('#species').show(1000)
+    		$('#species').show(1000);
     		$('#species').scrollTop(0);
     		$('#camera').animate({marginLeft:0}, 1000);
-    		$('.speciesThumbnail').hide(700)
+    		$('.speciesThumbnail').hide(700);
     	} else {
-    		self.cameraButtonState('&#x1F50D')
+    		self.cameraButtonState('&#x1F50D');
     		$('#pic').animate({width:0}, 1000);
-    		$('#species').hide(500)
+    		$('#species').hide(500);
     		var margin = window.innerWidth*0.25;
     		$('#camera').animate({marginLeft: margin }, 1000);
-    		$('.speciesThumbnail').show(1300)
+    		$('.speciesThumbnail').show(1300);
     	}
     }
 
@@ -49,25 +49,25 @@ function ViewModel() {
     	if(self.currentSpecimen()){self.currentSpecimen().isSelected(false)};
     	self.currentSpecimen(spec);
     	self.currentSpecimen().isSelected(true);
-    }
+    };
 
     this.setCurrentSpecimen(self.specimens()[0]);
 
 
 
     this.setCurrentSpecimenFromId = function(id){
-		self.currentSpecimen().isSelected(false)
+		self.currentSpecimen().isSelected(false);
 
 		var found;
 		self.specimens().forEach(function(s){
 			if(s.id == id){
 				found = s;
-			}
+			};
 		});
 
 		self.currentSpecimen(found);
 		self.currentSpecimen().isSelected(true);
-	}
+	};
     //this.picSrc = ko.observable("")
 
 
@@ -77,7 +77,7 @@ function ViewModel() {
     //get an array of unique species identifiers 
     this.species = [];
     this.specimens().forEach(function(s){
-    	self.species.push(s.species)
+    	self.species.push(s.species);
     })
     this.species = this.species.filter(function (e, i, arr) {
 	    return arr.lastIndexOf(e) === i;
@@ -88,7 +88,7 @@ function ViewModel() {
 	var temp = [];
 	for(var i = 0; i<this.species.length; i++){
 		temp.push(new Species(this.species[i]));
-	}
+	};
 	this.species = temp;
 
 
@@ -102,13 +102,13 @@ function ViewModel() {
 	}
 
 	this.setCurrentSpeciesFromString = function(string){
-		self.currentSpecies().isSelected(false)
+		self.currentSpecies().isSelected(false);
 
 		var found;
 		self.species.forEach(function(s){
 			if(s.name == string){
 				found = s;
-			}
+			};
 		});
 
 		self.currentSpecies(found);
@@ -118,7 +118,7 @@ function ViewModel() {
 	
 
     this.revealSpecies = function(speciesString){
-    	console.log('reveal'+speciesString)
+    	console.log('reveal'+speciesString);
     	
     	markers.forEach(function(m){
     		if(speciesString !== 'All'){
@@ -127,11 +127,11 @@ function ViewModel() {
 	    			m.marker.setAnimation(google.maps.Animation.DROP);
 	    		} else {
 	    			m.marker.setMap(null);
-	    		}
+	    		};
 	    	} else {
 	    		m.marker.setMap(map);
 	    		m.marker.setAnimation(google.maps.Animation.DROP);
-	    	}
+	    	};
     	})
 
     	//close all the infoWindows
@@ -139,7 +139,7 @@ function ViewModel() {
     		m.infoWindow.close();
     	})
 
-    }
+    };
 
 
 	var all = new Species('All');
@@ -151,13 +151,13 @@ function ViewModel() {
 
 
    
-}
+};
 
 
 
 
 // Activates knockout.js
-app = new ViewModel()
+app = new ViewModel();
 ko.applyBindings(app);
 
 
