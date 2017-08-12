@@ -37,8 +37,8 @@ function ViewModel() {
     		var margin = window.innerWidth*0.25;
     		$('#camera').animate({marginLeft: margin }, 1000);
     		$('.speciesThumbnail').show(1300);
-    	}
-    }
+    	};
+    };
 
 
 
@@ -99,7 +99,7 @@ function ViewModel() {
 		self.currentSpecies().isSelected(true);
 		self.revealSpecies(s.name);
 
-	}
+	};
 
 	this.setCurrentSpeciesFromString = function(string){
 		self.currentSpecies().isSelected(false);
@@ -132,12 +132,12 @@ function ViewModel() {
 	    		m.marker.setMap(map);
 	    		m.marker.setAnimation(google.maps.Animation.DROP);
 	    	};
-    	})
+    	});
 
     	//close all the infoWindows
     	markers.forEach(function(m){
     		m.infoWindow.close();
-    	})
+    	});
 
     };
 
@@ -177,9 +177,9 @@ function filterList() {
         } else {
             li[i].style.display = "none";
 
-        }
-    }
-}
+        };
+    };
+};
 
 
 
