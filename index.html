@@ -65,13 +65,13 @@
 		</div>
 
 		<article class = "article" id = "species">
-		<!-- 	<h1 data-bind = "text: species">fds</h1> -->
+				<span class = "excerpt" data-bind = "text: currentSpecies().excerpt"></span>
 			
 		</article>
 
 	</section>
 	<div id = "pic" tabindex = "-1">
-	<img id = "bird" data-bind = "attr:{src: currentSpecimen().path}"><p data-bind = "text:currentSpecimen().path"></p>
+	<img id = "bird" data-bind = "attr:{src: currentSpecies().path}"><p data-bind = "text:currentSpecimen().path"></p>
 	</div>
 </div>
 

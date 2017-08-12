@@ -38,6 +38,16 @@ html, body {
 	
 }
 
+.excerpt{
+/*	display:block;
+*/	background-color:white;
+	color:black;
+	line-height:100%;
+	font-size:16px;
+	padding-left:50px;
+	padding-right:50px;
+}
+
 .article{
 	/*z-index:3;*/
 /*	background-color:red;
@@ -57,8 +67,8 @@ html, body {
 
 #species{
 
-	/*background-color: white;
-*/
+background-color:rgba(103, 105, 97, 0.83);
+	overflow:scroll;
 
 	z-index:3;
 

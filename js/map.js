@@ -116,6 +116,36 @@ styles =
     }
 ]
 
+function mapObject(s){
+	var self = this;
+
+	this.id = s.id;
+	this.species = s.species;
+
+	var content = '<span style = "background-color:black; color:white; padding:10px; font-family:helvetica; font-size:20px">' 
+	+ 'latitude: '
+	+ s.loc.lat 
+	+ '  ' + ' longitude: '
+	+ s.loc.lng
+	+'</span>'
+
+	this.marker = new google.maps.Marker({
+		position: s.loc,
+		map: map,
+		animation: google.maps.Animation.DROP
+	});
+	this.infoWindow = new google.maps.InfoWindow({
+		content: content
+	})
+	this.marker.addListener('click', function(){
+		markers.forEach(function(m){
+			m.infoWindow.close();
+		})
+		self.infoWindow.open(map, self.marker);
+		app.setCurrentSpeciesFromString(self.species);
+	})
+
+}
 
 function initMap() {
 	
@@ -132,14 +162,7 @@ function initMap() {
     });
 
     app.specimens().forEach(function(s){
-    	markers.push({
-    		id: s.id,
-    		marker: new google.maps.Marker({
-    			position: s.loc,
-    			map: map,
-    			animation: google.maps.Animation.DROP
-    		})
-    	})
+    	markers.push(new mapObject(s));
     })
     
 

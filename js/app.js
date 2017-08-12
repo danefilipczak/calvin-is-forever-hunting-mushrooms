@@ -73,14 +73,43 @@ function ViewModel() {
 		if(self.currentSpecies() instanceof Species){self.currentSpecies().isSelected(false)};
 		self.currentSpecies(s);
 		self.currentSpecies().isSelected(true);
-		self.revealSpecies();
+		self.revealSpecies(s.name);
 
+	}
+
+	this.setCurrentSpeciesFromString = function(string){
+		self.currentSpecies().isSelected(false)
+		
+		var found;
+		self.species.forEach(function(s){
+			if(s.name == string){
+				found = s;
+			}
+		});
+
+		self.currentSpecies(found);
+		self.currentSpecies().isSelected(true);
 	}
 
 	
 
-    this.revealSpecies = function(){
-    	console.log('reveal')
+    this.revealSpecies = function(speciesString){
+    	console.log('reveal'+speciesString)
+    	
+    	markers.forEach(function(m){
+    		if(speciesString !== 'All'){
+	    		if(m.species == speciesString){
+	    			m.marker.setMap(map);
+	    			m.marker.setAnimation(google.maps.Animation.DROP);
+	    		} else {
+	    			m.marker.setMap(null);
+	    		}
+	    	} else {
+	    		m.marker.setMap(map);
+	    		m.marker.setAnimation(google.maps.Animation.DROP);
+	    	}
+    	})
+
     }
 
 

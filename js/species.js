@@ -4,7 +4,69 @@ globalSpecimenCounter = 0;
 function Species(name){
 		this.name = name;
 		this.isSelected = ko.observable(false);
-	}
+		this.path;
+
+		if(this.name!= 'All'){
+			this.getWikiImgSrc();
+			this.getWikiExcerpt();
+		}
+		
+}
+
+Species.prototype.getWikiExcerpt = function(){
+	var self = this;
+	var articleName = this.name;
+	var url = 'https://en.wikipedia.org/w/api.php?&format=json&action=query&prop=extracts&exintro=&explaintext=&titles='
+	+ articleName;
+	$.ajax({
+		url: url,
+		dataType: "jsonp",
+		success: function(r){
+			var pageId = r.query.pages;
+	        pageId = Object.keys(pageId)[0];
+	        var excerpt = r.query.pages[pageId].extract;
+			
+			self.excerpt = excerpt;
+		}
+	})
+}
+
+Species.prototype.getWikiImgSrc = function(articleName){
+	var self = this;
+	var articleName = this.name;
+//a multi-step process; first, query the page name and get a list of images, then make a second request to obtain the actual url of that image
+	var url1 = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + articleName + '&prop=pageimages&format=json';
+	$.ajax({
+	    url: url1,
+	    dataType: "jsonp",
+	    success: function(r){
+	        
+	        //extract the page ID from the reponse
+	        var pageId = r.query.pages;
+	        pageId = Object.keys(pageId)[0];
+	        //console.log(pageId)
+
+	        //then use it to get the img location
+	        var imgFile = r.query.pages[pageId].pageimage;
+	        // console.log(imgFile);
+	        // var url2 = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + imgFile + '&prop=imageinfo&iiprop=url&format=json'
+	        var url2 = "https://en.wikipedia.org/w/api.php?action=query&titles=Image:" + imgFile + "&prop=imageinfo&iiprop=url&format=json"
+	        $.ajax({
+	        	url: url2, 
+	        	dataType: "jsonp",
+	        	success: function(res){
+	        		var pageId = res.query.pages;
+	        		pageId = Object.keys(pageId)[0];
+	        		var path = res.query.pages[pageId].imageinfo[0].url;
+	        		// console.log(path)
+	        		// console.log(res)
+	        		self.path = path;
+	        	}
+	        });
+	    	}
+	    }
+	)
+};
 
 function Specimen(data) {
 	var self = this;
@@ -45,7 +107,7 @@ Specimen.prototype.getWikiImgSrc = function(articleName){
 
 	        //then use it to get the img location
 	        var imgFile = r.query.pages[pageId].pageimage;
-	        console.log(imgFile);
+	        // console.log(imgFile);
 	        // var url2 = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + imgFile + '&prop=imageinfo&iiprop=url&format=json'
 	        var url2 = "https://en.wikipedia.org/w/api.php?action=query&titles=Image:" + imgFile + "&prop=imageinfo&iiprop=url&format=json"
 	        $.ajax({
@@ -55,8 +117,8 @@ Specimen.prototype.getWikiImgSrc = function(articleName){
 	        		var pageId = res.query.pages;
 	        		pageId = Object.keys(pageId)[0];
 	        		var path = res.query.pages[pageId].imageinfo[0].url;
-	        		console.log(path)
-	        		console.log(res)
+	        		// console.log(path)
+	        		// console.log(res)
 	        		self.path = path;
 	        	}
 	        });
