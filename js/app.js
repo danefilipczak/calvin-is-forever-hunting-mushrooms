@@ -37,7 +37,7 @@ function ViewModel() {
     		var margin = window.innerWidth*0.25;
     		$('#camera').animate({marginLeft: margin }, 1000);
     		$('.speciesThumbnail').show(1300);
-    	};
+    	}
     };
 
 
@@ -46,7 +46,9 @@ function ViewModel() {
     this.currentSpecimen = ko.observable();
 
     this.setCurrentSpecimen = function(spec){
-    	if(self.currentSpecimen()){self.currentSpecimen().isSelected(false)};
+    	if(self.currentSpecimen()){
+    		self.currentSpecimen().isSelected(false);
+    	};
     	self.currentSpecimen(spec);
     	self.currentSpecimen().isSelected(true);
     };
@@ -62,7 +64,7 @@ function ViewModel() {
 		self.specimens().forEach(function(s){
 			if(s.id == id){
 				found = s;
-			};
+			}
 		});
 
 		self.currentSpecimen(found);
@@ -78,7 +80,7 @@ function ViewModel() {
     this.species = [];
     this.specimens().forEach(function(s){
     	self.species.push(s.species);
-    })
+    });
     this.species = this.species.filter(function (e, i, arr) {
 	    return arr.lastIndexOf(e) === i;
 	});
@@ -88,13 +90,13 @@ function ViewModel() {
 	var temp = [];
 	for(var i = 0; i<this.species.length; i++){
 		temp.push(new Species(this.species[i]));
-	};
+	}
 	this.species = temp;
 
 
 	this.currentSpecies = ko.observable();
 	this.setCurrentSpecies = function(s){
-		if(self.currentSpecies() instanceof Species){self.currentSpecies().isSelected(false)};
+		if(self.currentSpecies() instanceof Species){self.currentSpecies().isSelected(false)}
 		self.currentSpecies(s);
 		self.currentSpecies().isSelected(true);
 		self.revealSpecies(s.name);
@@ -108,12 +110,12 @@ function ViewModel() {
 		self.species.forEach(function(s){
 			if(s.name == string){
 				found = s;
-			};
+			}
 		});
 
 		self.currentSpecies(found);
 		self.currentSpecies().isSelected(true);
-	}
+	};
 
 	
 
@@ -127,11 +129,11 @@ function ViewModel() {
 	    			m.marker.setAnimation(google.maps.Animation.DROP);
 	    		} else {
 	    			m.marker.setMap(null);
-	    		};
+	    		}
 	    	} else {
 	    		m.marker.setMap(map);
 	    		m.marker.setAnimation(google.maps.Animation.DROP);
-	    	};
+	    	}
     	});
 
     	//close all the infoWindows
@@ -148,10 +150,8 @@ function ViewModel() {
 	this.species.reverse();
 	
 
-
-
-   
-};
+  
+}
 
 
 
@@ -177,9 +177,9 @@ function filterList() {
         } else {
             li[i].style.display = "none";
 
-        };
-    };
-};
+        }
+    }
+}
 
 
 
