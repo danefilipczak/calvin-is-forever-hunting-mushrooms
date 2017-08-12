@@ -5,19 +5,22 @@ function Species(name){
 		this.name = name;
 		this.isSelected = ko.observable(false);
 		this.path;
+		this.excerpt;
 
 		if(this.name!= 'All'){
 			this.getWikiImgSrc();
-			this.getWikiExcerpt();
+			this.getWikiExcerpt(this.name);
+		} else {
+			this.getWikiExcerpt('Fungus')
 		}
 		
 }
 
-Species.prototype.getWikiExcerpt = function(){
+Species.prototype.getWikiExcerpt = function(article){
 	var self = this;
-	var articleName = this.name;
+	//var articleName = this.name;
 	var url = 'https://en.wikipedia.org/w/api.php?&format=json&action=query&prop=extracts&exintro=&explaintext=&titles='
-	+ articleName;
+	+ article;
 	$.ajax({
 		url: url,
 		dataType: "jsonp",
@@ -44,12 +47,10 @@ Species.prototype.getWikiImgSrc = function(articleName){
 	        //extract the page ID from the reponse
 	        var pageId = r.query.pages;
 	        pageId = Object.keys(pageId)[0];
-	        //console.log(pageId)
+	        
 
 	        //then use it to get the img location
 	        var imgFile = r.query.pages[pageId].pageimage;
-	        // console.log(imgFile);
-	        // var url2 = 'https://en.wikipedia.org/w/api.php?action=query&titles=' + imgFile + '&prop=imageinfo&iiprop=url&format=json'
 	        var url2 = "https://en.wikipedia.org/w/api.php?action=query&titles=Image:" + imgFile + "&prop=imageinfo&iiprop=url&format=json"
 	        $.ajax({
 	        	url: url2, 
@@ -58,8 +59,6 @@ Species.prototype.getWikiImgSrc = function(articleName){
 	        		var pageId = res.query.pages;
 	        		pageId = Object.keys(pageId)[0];
 	        		var path = res.query.pages[pageId].imageinfo[0].url;
-	        		// console.log(path)
-	        		// console.log(res)
 	        		self.path = path;
 	        	}
 	        });

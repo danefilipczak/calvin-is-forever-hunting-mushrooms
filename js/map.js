@@ -1,15 +1,7 @@
 var map;
 var markers = [];
 
-// function initMap(){
-// 	$('#map')[0]
-// 	map = new google.maps.Map(document.getElementById('map'), {
-// 		center: {lat: 40.8674958, lng: -73.8374625},
-// 		zoom: 13
-// 	});
-// 	console.log('h')
 
-// }
 
 
 styles = 
@@ -132,7 +124,8 @@ function mapObject(s){
 	this.marker = new google.maps.Marker({
 		position: s.loc,
 		map: map,
-		animation: google.maps.Animation.DROP
+		animation: google.maps.Animation.DROP,
+  			icon:"http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
 	});
 	this.infoWindow = new google.maps.InfoWindow({
 		content: content
@@ -143,6 +136,7 @@ function mapObject(s){
 		})
 		self.infoWindow.open(map, self.marker);
 		app.setCurrentSpeciesFromString(self.species);
+		app.setCurrentSpecimenFromId(self.id)
 	})
 
 }
@@ -152,41 +146,17 @@ function initMap() {
 
 
     map = new google.maps.Map(document.getElementById('map'), {
-    	mapTypeControlOptions: {
-              style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-              position: google.maps.ControlPosition.BOTTOM_CENTER
-       },
+  
       center: {lat: 40.4443, lng: -79.9532},
       styles: styles,
-      zoom: 13
+      zoom: 13,
+      mapTypeControl:false
     });
 
     app.specimens().forEach(function(s){
     	markers.push(new mapObject(s));
     })
     
-
-
-
-//     var centerControlDiv = $('.main')[0];
-		// var centerControl = new google.CenterControl(centerControlDiv, map);
-
-		// centerControlDiv.index = 1;
 		 map.controls[google.maps.ControlPosition.TOP_CENTER].push($('.main')[0]);
 }
 
-
-// $( "#species" ).mouseleave(function() {
-//   $( "#map" )[0].focus();
-//   console.log('speciesleave')
-//   $('#pic').animate({width:0}, 618)
-// });
-
-
-// $( "#species" ).mouseenter(function() {
-//   $( "#map" )[0].focus();
-//   console.log('speciesover')
-//   width = window.innerWidth;
-//   $('#pic').animate({width:width}, 618);
-
-// });

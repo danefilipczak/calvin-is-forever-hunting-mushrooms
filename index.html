@@ -3,20 +3,14 @@
 <head>
 <link rel = "stylesheet" href = "css/main.css">
 <link href="https://fonts.googleapis.com/css?family=Bubblegum+Sans" rel="stylesheet">
-<title>Cutest Fungus of Pittsburgh</title>
+<title>Calvin is forever-collecting mushrooms</title>
 
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 </head>
 
 <body>
-<!-- 
-<p>First name: <strong data-bind = "text: firstName">todo</strong></p>
-<p>Last name: <strong data-bind = "text: lastName">todo</strong></p>
 
-<p>First name: <input data-bind="value: firstName" /></p>
-<p>Last name: <input data-bind="value: lastName" /></p>
-
-<p>Full name: <strong data-bind="text: fullName"></strong></p> -->
 <div class = "main">
 	<section class = "content">
 		<article class = "article" id = "nav">
@@ -33,18 +27,7 @@
 			  	</a>
 
 			  </li>
-			  
-			  <!-- <li><a href="#">Adele</a></li>
-			  <li><a href="#">Agnes</a></li>
-
-			  
-			  <li><a href="#">Billy</a></li>
-			  <li><a href="#">Bob</a></li>
-
-			  
-			  <li><a href="#">Calvin</a></li>
-			  <li><a href="#">Christina</a></li>
-			  <li><a href="#">Cindy</a></li> -->
+			
 			</ul>
 
 
@@ -56,6 +39,7 @@
 			<span class = "highlight">Specimen ID: <a data-bind = "text: currentSpecimen().id"></a> </span>
 			<br>
 			<span class = "highlight">Species: <a data-bind = "text: currentSpecimen().species"></a> </span>
+			<br><br>
 			<p class = "highlight" data-bind = "text: currentSpecimen().notes"></p>
 			
 		</article>
@@ -70,8 +54,12 @@
 		</article>
 
 	</section>
+	<div class = "speciesThumbnail" tabindex = "-1">
+		<img data-bind = "attr:{src: currentSpecies().path}, click: togglePic">
+	</div>
+
 	<div id = "pic" tabindex = "-1">
-	<img id = "bird" data-bind = "attr:{src: currentSpecies().path}"><p data-bind = "text:currentSpecimen().path"></p>
+		<img id = "bird" data-bind = "attr:{src: currentSpecies().path}"><p data-bind = "text:currentSpecimen().path"></p>
 	</div>
 </div>
 

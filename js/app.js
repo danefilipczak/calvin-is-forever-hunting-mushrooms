@@ -16,25 +16,33 @@ function ViewModel() {
 
 
     
-	//----------------------picture stuff
-    this.cameraButtonState = ko.observable('&#128247')
+	//----------------------picture 
+    this.cameraButtonState = ko.observable('&#x1F50D')
     this.togglePic = function(){
-    	if(self.cameraButtonState() == '&#128247'){
+    	if(self.cameraButtonState() == '&#x1F50D'){
     		//this redundent line takes care of asynchonous loading of the url paths
     		self.currentSpecimen(self.currentSpecimen())
 
     		self.cameraButtonState('&#9940;')
     		//show picture
-    		$('#pic').animate({width:window.innerWidth}, 618);
+    		$('#pic').animate({width:window.innerWidth}, 700);
+    		$('#species').show(1000)
+    		$('#species').scrollTop(0);
+    		$('#camera').animate({marginLeft:0}, 1000);
+    		$('.speciesThumbnail').hide(700)
     	} else {
-    		self.cameraButtonState('&#128247')
-    		$('#pic').animate({width:0}, 618);
+    		self.cameraButtonState('&#x1F50D')
+    		$('#pic').animate({width:0}, 1000);
+    		$('#species').hide(500)
+    		var margin = window.innerWidth*0.25;
+    		$('#camera').animate({marginLeft: margin }, 1000);
+    		$('.speciesThumbnail').show(1300)
     	}
     }
 
 
 
-    //current specimen stuff
+    //------------------------current specimen 
     this.currentSpecimen = ko.observable();
 
     this.setCurrentSpecimen = function(spec){
@@ -44,6 +52,22 @@ function ViewModel() {
     }
 
     this.setCurrentSpecimen(self.specimens()[0]);
+
+
+
+    this.setCurrentSpecimenFromId = function(id){
+		self.currentSpecimen().isSelected(false)
+
+		var found;
+		self.specimens().forEach(function(s){
+			if(s.id == id){
+				found = s;
+			}
+		});
+
+		self.currentSpecimen(found);
+		self.currentSpecimen().isSelected(true);
+	}
     //this.picSrc = ko.observable("")
 
 
@@ -79,7 +103,7 @@ function ViewModel() {
 
 	this.setCurrentSpeciesFromString = function(string){
 		self.currentSpecies().isSelected(false)
-		
+
 		var found;
 		self.species.forEach(function(s){
 			if(s.name == string){
@@ -110,23 +134,33 @@ function ViewModel() {
 	    	}
     	})
 
+    	//close all the infoWindows
+    	markers.forEach(function(m){
+    		m.infoWindow.close();
+    	})
+
     }
 
 
-    var all = new Species('All');
+	var all = new Species('All');
 	this.species.push(all);
 	this.setCurrentSpecies(this.species[this.species.length-1]);
 	this.species.reverse();
-
+	
 
 
 
    
 }
 
+
+
+
 // Activates knockout.js
 app = new ViewModel()
 ko.applyBindings(app);
+
+
 
 
 //helper function 
@@ -149,43 +183,3 @@ function filterList() {
 
 
 
-// $.ajax('https://en.wikipedia.org/w/api.php?action=query')
-
-// function getSpeciesByCountry(country){
-// 	var url = 'http://apiv3.iucnredlist.org/api/v3/country/getspecies/'
-// 	+ country 
-// 	+ '?token=9bb4facb6d23f48efbf424bb05c0c1ef1cf6f468393bc745d42179ac4aca5fee';
-// 	$.ajax({
-// 		url: url,
-// 		// dataType: "jsonP",
-// 		success: function(response){
-// 			var filtered = response.result.filter(function (a) {
-// 			    return a.category === 'EN';
-// 			});
-// 			console.log(filtered);
-// 		}
-// 	});
-
-// }
-
-
-// function wikiSpecies(speciesStr){
-// 	var wikiUrl = "https://en.wikipedia.org/w/api.php?action=opensearch&search=" 
-// 	+ speciesStr 
-// 	+ "&format=json&callback=wikiCallback";
-
-// 	$.ajax({
-// 		url: wikiUrl,
-// 		dataType: "jsonP",
-// 		success: function(response){
-// 			console.log(response);
-// 			app.wikiList.removeAll()
-// 			response[1].forEach(function(s){
-// 				app.wikiList.push({
-// 					name: s,
-// 					url: 'https://en.wikipedia.org/wiki/' + s
-// 				});
-// 			});
-// 		}
-// 	});
-// };
