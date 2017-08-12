@@ -48,7 +48,7 @@ function ViewModel() {
     this.setCurrentSpecimen = function(spec){
     	if(self.currentSpecimen()){
     		self.currentSpecimen().isSelected(false);
-    	};
+    	}
     	self.currentSpecimen(spec);
     	self.currentSpecimen().isSelected(true);
     };
@@ -96,7 +96,7 @@ function ViewModel() {
 
 	this.currentSpecies = ko.observable();
 	this.setCurrentSpecies = function(s){
-		if(self.currentSpecies() instanceof Species){self.currentSpecies().isSelected(false)}
+		if(self.currentSpecies() instanceof Species){self.currentSpecies().isSelected(false)};
 		self.currentSpecies(s);
 		self.currentSpecies().isSelected(true);
 		self.revealSpecies(s.name);
